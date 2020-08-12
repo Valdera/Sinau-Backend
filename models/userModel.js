@@ -18,7 +18,8 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['user', 'admin', 'teacher']
+    enum: ['student', 'admin', 'teacher'],
+    default: 'student'
   },
   photo: {
     type: String
@@ -28,6 +29,21 @@ const userSchema = new mongoose.Schema({
     min: [1, 'Kelas must be above 1'],
     max: [12, ' Kelas must be below 12']
   },
+  majors: {
+    type: String,
+    required: [true, 'An user must have a majors']
+  },
+  lastExam: [
+    {
+      type: mongoose.Schema.OnjectId,
+      ref: 'Exam'
+    }
+  ],
+  lastScore: [
+    {
+      type: Number
+    }
+  ],
   password: {
     type: String,
     required: [true, 'Please provide a password'],
