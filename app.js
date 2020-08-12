@@ -5,6 +5,11 @@ const hpp = require('hpp');
 const helmet = require('helmet');
 const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
+const AppError = require('./utils/appError');
+
+const userRouter = require('./routes/userRoutes');
+
+const globalErrorHandler = require('./controller/errorController');
 
 const app = express();
 
@@ -46,5 +51,20 @@ app.use(
 
 // Serving static files
 app.use(express.static(`${__dirname}/public`));
+
+// Request Time
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
+
+//* ROUTES
+app.use('/api/v1/users', userRouter);
+
+app.all('*', (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
+});
+
+app.use(globalErrorHandler);
 
 module.exports = app;
