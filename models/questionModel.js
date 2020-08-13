@@ -12,7 +12,7 @@ const questionSchema = new mongoose.Schema(
         type: String,
         minLength: 2,
         maxLength: 5,
-        required: [true, 'A tour must have a choices']
+        required: [true, 'A question must have a choices']
       }
     ],
     correctAnswer: {
@@ -36,7 +36,7 @@ const questionSchema = new mongoose.Schema(
     exam: {
       type: mongoose.Schema.ObjectId,
       ref: 'Exam',
-      required: [true, 'Review must belong to an exam']
+      required: [true, 'Question must belong to an exam']
     }
   },
   {

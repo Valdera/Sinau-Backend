@@ -1,0 +1,28 @@
+[{
+        "name": "Valdera",
+        "email": "admin@example.io",
+        "kelas": 12,
+        "role": "admin",
+        "majors": "ipa",
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+    {
+        "name": "Lisa",
+        "email": "lisa@example.io",
+        "kelas": 11,
+        "role": "student",
+        "majors": "ipa",
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    },
+    {
+        "name": "Arigi",
+        "email": "arigi@example.io",
+        "kelas": 10,
+        "role": "student",
+        "majors": "ipa",
+        "password": "test1234",
+        "passwordConfirm": "test1234"
+    }
+]

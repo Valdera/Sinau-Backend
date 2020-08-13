@@ -26,16 +26,18 @@ const userSchema = new mongoose.Schema({
   },
   kelas: {
     type: Number,
-    min: [1, 'Kelas must be above 1'],
-    max: [12, ' Kelas must be below 12']
+    min: [10, 'Kelas must be above or equal 10'],
+    max: [12, ' Kelas must be below or equal 12'],
+    required: [true, 'An user must have a class']
   },
   majors: {
     type: String,
-    required: [true, 'An user must have a majors']
+    required: [true, 'An user must have a majors'],
+    enum: ['ipa', 'ips']
   },
   lastExam: [
     {
-      type: mongoose.Schema.OnjectId,
+      type: mongoose.Schema.ObjectId,
       ref: 'Exam'
     }
   ],

@@ -54,13 +54,13 @@ examSchema.pre('save', function(next) {
 });
 
 //* QUERY MIDDLEWARE
-examSchema.pre(/^find/, function(next) {
-  this.populate({
-    path: 'questions',
-    select: '-__v'
-  });
-  next();
-});
+// examSchema.pre(/^find/, function(next) {
+//   this.populate({
+//     path: 'questions',
+//     select: '-__v'
+//   });
+//   next();
+// });
 
 const Exam = mongoose.model('Exam', examSchema);
 
