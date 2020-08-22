@@ -1,0 +1,31 @@
+[{
+        "examName": "SIMAK UI 2020",
+        "duration": 120,
+        "price": 5000,
+        "totalQuestions": 100,
+        "major": "ipa",
+        "sessions": 5,
+        "year": 2020,
+        "tipeSoal": "simak"
+    },
+    {
+        "examName": "UM UGM 2020",
+        "duration": 120,
+        "price": 5000,
+        "totalQuestions": 100,
+        "major": "ipa",
+        "sessions": 5,
+        "year": 2020,
+        "tipeSoal": "ugm"
+    },
+    {
+        "examName": "Utbk 2020",
+        "duration": 120,
+        "price": 5000,
+        "totalQuestions": 100,
+        "major": "ipa",
+        "sessions": 5,
+        "year": 2020,
+        "tipeSoal": "utbk"
+    }
+]

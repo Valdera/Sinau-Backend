@@ -1,0 +1,9 @@
+[{
+    "question": "Siapa nama presiden pertama ?",
+    "choices": ["soekarno", "jokowi", "sby", "megawati"],
+    "correctAnswer": 0,
+    "questionType": "a",
+    "session": "mtk",
+    "difficulty": "easy",
+    "exam": "5f417f752547793b8496be3a"
+}]

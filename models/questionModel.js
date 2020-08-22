@@ -15,9 +15,15 @@ const questionSchema = new mongoose.Schema(
         required: [true, 'A question must have a choices']
       }
     ],
+    questionImages: {
+      type: String
+    },
     correctAnswer: {
       type: Number,
       required: [true, 'A question must have an correct answer']
+    },
+    questionNext: {
+      type: String
     },
     questiontype: {
       type: String,
@@ -50,7 +56,8 @@ questionSchema.index({ exam: 1, session: 1 });
 //* DOCUMENT MIDDLEWARE
 
 questionSchema.post('save', async function() {
-  await this.constructor.calcAverageRatings(this.exam);
+  await this.constructor.calcQuestions(this.exam);
+  await this.constructor.updateQuestions(this._id, this.exam);
 });
 
 //* QUERY MIDDLEWARE
@@ -63,6 +70,17 @@ questionSchema.pre(/^findOneAnd/, async function(next) {
 questionSchema.post(/^findOneAnd/, async function() {
   await this.r.constructor.calcQuestions(this.r.exam);
 });
+
+questionSchema.statics.updateQuestions = async function(questionId, examId) {
+  if (examId && questionId) {
+    const exam = await Exam.findById(examId);
+    const { questions } = exam;
+    questions.push(questionId);
+    await Exam.findByIdAndUpdate(examId, {
+      questions
+    });
+  }
+};
 
 questionSchema.statics.calcQuestions = async function(examId) {
   const stats = await this.aggregate([

@@ -1,11 +1,11 @@
 const express = require('express');
 // const authController = require('../controller/authController');
 const examController = require('../controller/examController');
-const qusetionRouter = require('./questionRoutes');
+const questionRouter = require('./questionRoutes');
 
 const router = express.Router();
 
-router.use('/:examId/qusetions', qusetionRouter);
+router.use('/:examId/questions', questionRouter);
 
 router
   .route('/:id')

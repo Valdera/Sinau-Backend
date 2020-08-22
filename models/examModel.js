@@ -3,12 +3,24 @@ const slugify = require('slugify');
 
 const examSchema = new mongoose.Schema(
   {
-    name: {
+    examName: {
       type: String,
       required: [true, 'An exam must have a name'],
       trim: true,
       maxlength: [15, 'An exam must have less or equal than 10 characters'],
       minlength: [3, 'An exam must have more or equal than 3 characters']
+    },
+    sessions: {
+      type: Number
+    },
+    year: {
+      type: Number,
+      required: [true, 'An exam must have a year']
+    },
+    tipeSoal: {
+      type: String,
+      required: [true, 'An exam must have a type'],
+      enum: ['simak', 'ugm', 'utbk']
     },
     slug: {
       type: String
@@ -32,7 +44,13 @@ const examSchema = new mongoose.Schema(
       type: String,
       enum: ['ipa', 'ips'],
       required: [true, 'An exam must have a major']
-    }
+    },
+    questions: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Question'
+      }
+    ]
   },
   {
     toJSON: { virtuals: true },
@@ -41,15 +59,15 @@ const examSchema = new mongoose.Schema(
 );
 
 //* VIRTUAL
-examSchema.virtual('questions', {
-  ref: 'Question',
-  foreignField: 'exam',
-  localField: true
-});
+// examSchema.virtual('questions', {
+//   ref: 'Question',
+//   foreignField: 'exam',
+//   localField: true
+// });
 
 //* DOCUMENT MIDDLEWARE
 examSchema.pre('save', function(next) {
-  this.slug = slugify(this.name, { lower: true });
+  this.slug = slugify(this.examName, { lower: true });
   next();
 });
 

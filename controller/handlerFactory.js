@@ -70,7 +70,7 @@ exports.getAll = Model =>
   catchAsync(async (req, res, next) => {
     let filter = {};
 
-    if (req.params.examId) filter = { examId: req.params.examId };
+    if (req.params.examId) filter = { exam: req.params.examId };
 
     const features = new APIFeatures(Model.find(filter), req.query)
       .filter()
@@ -82,7 +82,7 @@ exports.getAll = Model =>
 
     res.status(200).json({
       status: 'success',
-      results: doc.data,
+      results: doc.length,
       data: {
         data: doc
       }
