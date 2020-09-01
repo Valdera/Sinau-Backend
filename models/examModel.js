@@ -10,17 +10,23 @@ const examSchema = new mongoose.Schema(
       maxlength: [15, 'An exam must have less or equal than 10 characters'],
       minlength: [3, 'An exam must have more or equal than 3 characters']
     },
-    sessions: {
-      type: Number
-    },
+    sessions: [
+      {
+        type: String
+      }
+    ],
     year: {
       type: Number,
       required: [true, 'An exam must have a year']
     },
-    tipeSoal: {
+    examType: {
       type: String,
       required: [true, 'An exam must have a type'],
       enum: ['simak', 'ugm', 'utbk']
+    },
+    examSession: {
+      type: String,
+      required: [true, 'An exam must have an exam session name']
     },
     slug: {
       type: String

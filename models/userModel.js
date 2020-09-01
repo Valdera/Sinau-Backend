@@ -21,9 +21,6 @@ const userSchema = new mongoose.Schema({
     enum: ['student', 'admin', 'teacher'],
     default: 'student'
   },
-  photo: {
-    type: String
-  },
   kelas: {
     type: Number,
     min: [10, 'Kelas must be above or equal 10'],
@@ -44,6 +41,12 @@ const userSchema = new mongoose.Schema({
   lastScore: [
     {
       type: Number
+    }
+  ],
+  tryouts: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Tryout'
     }
   ],
   password: {

@@ -57,7 +57,7 @@ questionSchema.index({ exam: 1, session: 1 });
 
 questionSchema.post('save', async function() {
   await this.constructor.calcQuestions(this.exam);
-  await this.constructor.updateQuestions(this._id, this.exam);
+  await this.constructor.updateQuestions(this._id, this.session, this.exam);
 });
 
 //* QUERY MIDDLEWARE
@@ -71,13 +71,21 @@ questionSchema.post(/^findOneAnd/, async function() {
   await this.r.constructor.calcQuestions(this.r.exam);
 });
 
-questionSchema.statics.updateQuestions = async function(questionId, examId) {
+questionSchema.statics.updateQuestions = async function(
+  questionId,
+  session,
+  examId
+) {
   if (examId && questionId) {
     const exam = await Exam.findById(examId);
-    const { questions } = exam;
+    const { questions, sessions } = exam;
+    if (!sessions.includes(session)) {
+      sessions.push(session);
+    }
     questions.push(questionId);
     await Exam.findByIdAndUpdate(examId, {
-      questions
+      questions,
+      sessions
     });
   }
 };
