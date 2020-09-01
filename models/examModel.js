@@ -22,7 +22,7 @@ const examSchema = new mongoose.Schema(
     examType: {
       type: String,
       required: [true, 'An exam must have a type'],
-      enum: ['simak', 'ugm', 'utbk']
+      enum: ['simak', 'umugm', 'utbk']
     },
     examSession: {
       type: String,
@@ -38,9 +38,6 @@ const examSchema = new mongoose.Schema(
     price: {
       type: Number,
       required: [true, 'An exam must have a price']
-    },
-    totalQuestions: {
-      type: Number
     },
     createdAt: {
       type: Date,

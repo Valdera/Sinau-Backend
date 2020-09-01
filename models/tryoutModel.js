@@ -54,7 +54,6 @@ tryoutSchema.statics.updateTryouts = async function(tryoutId, userId) {
   if (tryoutId && userId) {
     const user = await User.findById(userId);
     const { tryouts } = user;
-    console.log(user);
     if (!tryouts.includes(tryoutId)) {
       tryouts.push(tryoutId);
       await User.findByIdAndUpdate(userId, {

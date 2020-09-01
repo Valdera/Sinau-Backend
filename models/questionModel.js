@@ -30,6 +30,10 @@ const questionSchema = new mongoose.Schema(
       enum: ['a', 'b', 'c', 'd'],
       default: 'a'
     },
+    usingMathjax: {
+      type: Boolean,
+      required: [true, 'Need an identifier for mathjax']
+    },
     session: {
       type: String,
       required: [true, 'A question must have a session']
@@ -56,7 +60,7 @@ questionSchema.index({ exam: 1, session: 1 });
 //* DOCUMENT MIDDLEWARE
 
 questionSchema.post('save', async function() {
-  await this.constructor.calcQuestions(this.exam);
+  //await this.constructor.calcQuestions(this.exam);
   await this.constructor.updateQuestions(this._id, this.session, this.exam);
 });
 
@@ -67,9 +71,9 @@ questionSchema.pre(/^findOneAnd/, async function(next) {
   next();
 });
 
-questionSchema.post(/^findOneAnd/, async function() {
-  await this.r.constructor.calcQuestions(this.r.exam);
-});
+// questionSchema.post(/^findOneAnd/, async function() {
+//   await this.r.constructor.calcQuestions(this.r.exam);
+// });
 
 questionSchema.statics.updateQuestions = async function(
   questionId,
@@ -90,25 +94,25 @@ questionSchema.statics.updateQuestions = async function(
   }
 };
 
-questionSchema.statics.calcQuestions = async function(examId) {
-  const stats = await this.aggregate([
-    {
-      $match: { exam: examId }
-    },
-    {
-      $group: {
-        _id: '$exam',
-        totalQuestions: { $sum: 1 }
-      }
-    }
-  ]);
+// questionSchema.statics.calcQuestions = async function(examId) {
+//   const stats = await this.aggregate([
+//     {
+//       $match: { exam: examId }
+//     },
+//     {
+//       $group: {
+//         _id: '$exam',
+//         totalQuestions: { $sum: 1 }
+//       }
+//     }
+//   ]);
 
-  if (stats.length > 0) {
-    await Exam.findByIdAndUpdate(examId, {
-      totalQuestions: stats[0].totalQuestions
-    });
-  }
-};
+//   if (stats.length > 0) {
+//     await Exam.findByIdAndUpdate(examId, {
+//       totalQuestions: stats[0].totalQuestions
+//     });
+//   }
+// };
 
 const Question = mongoose.model('Question', questionSchema);
 
