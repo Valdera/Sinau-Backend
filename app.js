@@ -4,6 +4,7 @@ const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
 const helmet = require('helmet');
 const xss = require('xss-clean');
+const cors = require('cors');
 const mongoSanitize = require('express-mongo-sanitize');
 const AppError = require('./utils/appError');
 
@@ -44,6 +45,9 @@ app.use(mongoSanitize());
 
 // Data sanitation againts XSS
 app.use(xss());
+
+// Allow cross origin sites
+app.use(cors());
 
 // Prevent parameter pollution
 app.use(
