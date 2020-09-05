@@ -13,7 +13,7 @@ const filterObj = (obj, ...allowedFields) => {
 
 exports.updateMe = catchAsync(async (req, res, next) => {
   // 1) Create error if user post password data
-  if (req.body.password || req.body.passwordConfirem) {
+  if (req.body.password || req.body.passwordConfirm) {
     return next(
       new AppError(
         'This route is not for password updates. Please use /updateMyPassword',
@@ -22,7 +22,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     );
   }
   // 2) Update user document
-  const filteredBody = filterObj(req.body, 'name', 'email');
+  const filteredBody = filterObj(req.body, 'name', 'email', 'kelas', 'majors');
 
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,
