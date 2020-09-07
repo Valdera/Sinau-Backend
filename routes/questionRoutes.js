@@ -6,7 +6,10 @@ const router = express.Router({ mergeParams: true });
 router
   .route('/')
   .get(questionController.getAllQuestion)
-  .post(questionController.createQuestion);
+  .post(
+    questionController.uploadQuestionImage,
+    questionController.createQuestion
+  );
 
 router
   .route('/:id')

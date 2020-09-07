@@ -15,7 +15,7 @@ const questionSchema = new mongoose.Schema(
         required: [true, 'A question must have a choices']
       }
     ],
-    questionImages: {
+    image: {
       type: String
     },
     correctAnswer: {
@@ -37,6 +37,10 @@ const questionSchema = new mongoose.Schema(
     session: {
       type: String,
       required: [true, 'A question must have a session']
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now()
     },
     difficulty: {
       type: String,
