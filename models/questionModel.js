@@ -31,8 +31,7 @@ const questionSchema = new mongoose.Schema(
       default: 'a'
     },
     usingMathjax: {
-      type: Boolean,
-      required: [true, 'Need an identifier for mathjax']
+      type: Boolean
     },
     session: {
       type: String,
